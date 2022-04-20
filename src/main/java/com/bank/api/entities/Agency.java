@@ -1,6 +1,7 @@
 package com.bank.api.entities;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,21 +10,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.validation.constraints.NotNull;
 
 import com.bank.api.domain.BaseDomain;
-
-import lombok.NoArgsConstructor;
-
-import lombok.Setter;
+import com.bank.api.services.utils.Util;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor
 public class Agency extends BaseDomain {
 
+	@PrePersist
+	private void prePersist() {
+		this.agencyNumber = Util.getRandomString(5);
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "agency_id")
@@ -37,5 +43,16 @@ public class Agency extends BaseDomain {
 	private Manager manager;
 	
 	@OneToMany(mappedBy = "agency")
-	private Set<Account> accounts;
+	private List<Account> accounts = new ArrayList<Account>();
+	
+	public void addAccount(Account...accounts) {
+		for (Account account : accounts) {
+			this.accounts.add(account);
+		}
+	}
+
+	public Agency(@NotNull Manager manager) {
+		super();
+		this.manager = manager;
+	}
 }

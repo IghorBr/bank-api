@@ -11,8 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.bank.api.domain.BaseDomain;
+import com.bank.api.services.utils.Util;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +27,13 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 public class Account extends BaseDomain {
+	
+	@PrePersist
+	private void prePersist() {
+		this.createdAt = new Date();
+		this.enabled = true;
+		this.accountNumber = Util.getRandomString(7);
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,18 +44,33 @@ public class Account extends BaseDomain {
 	private String accountNumber;
 	
 	@Column(name = "created_at")
+	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 	
-	private BigDecimal balance;
+	private BigDecimal balance = new BigDecimal(0);
 	
 	@OneToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
+	@NotNull
 	private User user;
+	
+	private Boolean enabled;
 	
 	@ManyToOne
 	@JoinColumn(name = "agency_id", referencedColumnName = "agency_id")
+	@NotNull
 	private Agency agency;
+
+	public Account(BigDecimal balance, @NotNull User user, @NotNull Agency agency) {
+		super();
+		this.balance = balance;
+		this.user = user;
+		this.agency = agency;
+	}
+
+	public Account(@NotNull User user, @NotNull Agency agency) {
+		super();
+		this.user = user;
+		this.agency = agency;
+	}
 }
-
-
-

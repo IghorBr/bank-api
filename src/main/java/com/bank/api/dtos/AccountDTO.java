@@ -15,5 +15,6 @@ public class AccountDTO extends BaseDTO {
 	
 	private String accountNumber;
 	private BigDecimal balance;
+	private Long userId;
 
 }

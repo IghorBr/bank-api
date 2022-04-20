@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -26,6 +29,11 @@ import lombok.Setter;
 @Getter @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User extends BaseDomain {
+	
+	@PrePersist
+	private void prePersist() {
+		createdAt = new Date();
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,8 +66,21 @@ public class User extends BaseDomain {
 	private String cpf;
 	
 	@Column(name = "created_at")
+	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 	
 	@OneToOne(mappedBy = "user")
 	private Account account;
+
+	public User(@Email String email, @NotNull String name, @NotNull String lastName, String middleName,
+			@NotNull String accountPassword, @NotNull String internetPassword, @CPF @NotNull String cpf) {
+		super();
+		this.email = email;
+		this.name = name;
+		this.lastName = lastName;
+		this.middleName = middleName;
+		this.accountPassword = accountPassword;
+		this.internetPassword = internetPassword;
+		this.cpf = cpf;
+	}
 }
