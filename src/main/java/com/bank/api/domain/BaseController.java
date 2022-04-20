@@ -22,7 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public abstract class BaseController<T extends BaseDomain, K extends BaseDTO> {
 
 	@Autowired private BaseService<T> baseService;
-	private ModelMapper mapper = new ModelMapper();
+	protected ModelMapper mapper = new ModelMapper();
 	private Class<T> entityTarget;
 	private Class<K> dtoTarget;
 	

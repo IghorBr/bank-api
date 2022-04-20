@@ -3,6 +3,9 @@ package com.bank.api.domain;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +16,9 @@ public abstract class BaseServiceImpl<T extends BaseDomain> implements BaseServi
 
 	@Autowired
 	private BaseRepository<T> baseRepository;
+	
+	@PersistenceContext
+	protected EntityManager entityManager;
 
 	@Override
 	public T save(T entity) {
