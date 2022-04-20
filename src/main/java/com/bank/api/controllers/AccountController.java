@@ -18,4 +18,5 @@ public class AccountController extends BaseController<Account, AccountDTO> {
 	}
 	
 	@Autowired private AccountService accountService;
+	
 }

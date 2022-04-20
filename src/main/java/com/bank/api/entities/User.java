@@ -54,13 +54,9 @@ public class User extends BaseDomain {
 	@Column(name = "middle_name")
 	private String middleName;
 	
-	@Column(name = "account_pass")
+	@Column(name = "password")
 	@NotNull
-	private String accountPassword;
-	
-	@Column(name = "internet_pass")
-	@NotNull
-	private String internetPassword;
+	private String password;
 	
 	@CPF @NotNull
 	private String cpf;
@@ -73,14 +69,13 @@ public class User extends BaseDomain {
 	private Account account;
 
 	public User(@Email String email, @NotNull String name, @NotNull String lastName, String middleName,
-			@NotNull String accountPassword, @NotNull String internetPassword, @CPF @NotNull String cpf) {
+			@NotNull String password, @CPF @NotNull String cpf) {
 		super();
 		this.email = email;
 		this.name = name;
 		this.lastName = lastName;
 		this.middleName = middleName;
-		this.accountPassword = accountPassword;
-		this.internetPassword = internetPassword;
+		this.password = password;
 		this.cpf = cpf;
 	}
 }

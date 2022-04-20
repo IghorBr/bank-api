@@ -3,7 +3,6 @@ package com.bank.api.dtos;
 import java.util.List;
 
 import com.bank.api.domain.BaseDTO;
-import com.bank.api.entities.Account;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,5 +12,5 @@ public class AgencyDTO extends BaseDTO {
 	private static final long serialVersionUID = -2649485229582952136L;
 	
 	private String agencyNumber;
-	private List<Account> accounts;
+	private List<AccountDTO> accounts;
 }

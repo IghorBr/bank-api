@@ -25,9 +25,9 @@ public class DBServiceImpl {
 //		User(@Email String email, @NotNull String name, @NotNull String lastName, String middleName,
 //				@NotNull String accountPassword, @NotNull String internetPassword, @CPF @NotNull String cpf) 
 		
-		User user1 = new User("user1@email.com", "User 1", "Name", null, "1234", "123456", "781.248.020-84");
-		User user2 = new User("user2@email.com", "User 2", "Name", "Silva", "abcd", "abcdef", "794.103.490-52");
-		Manager manager = new Manager("manager@email.com", "Manager", "Name", null, "1ab2", "1a2b3c", "585.825.450-02");
+		User user1 = new User("user1@email.com", "User 1", "Name", null, "123456", "781.248.020-84");
+		User user2 = new User("user2@email.com", "User 2", "Name", "Silva", "abcdef", "794.103.490-52");
+		Manager manager = new Manager("manager@email.com", "Manager", "Name", null, "1a2b3c", "585.825.450-02");
 		
 		userService.saveAll(Arrays.asList(user1, user2, manager));
 		
@@ -42,17 +42,19 @@ public class DBServiceImpl {
 		
 //		Account(BigDecimal balance, @NotNull User user, @NotNull Agency agency)
 		
-		Account acc1 = new Account(new BigDecimal(1000), user1, agency1);
-		Account acc2 = new Account(user2, agency1);
+		Account acc1 = new Account(new BigDecimal(1000), "1234", user1, agency1);
+		Account acc2 = new Account("abcd", user2, agency1);
+		Account acc3 = new Account("1a2b", manager, agency1);
 		
-		accountService.saveAll(Arrays.asList(acc1, acc2));
+		accountService.saveAll(Arrays.asList(acc1, acc2, acc3));
 		
-		agency1.addAccount(acc1, acc2);
+		agency1.addAccount(acc1, acc2, acc3);
 		agencyService.save(agency1);
 		
 		user1.setAccount(acc1);
 		user2.setAccount(acc2);
-		userService.saveAll(Arrays.asList(user1, user2));
+		manager.setAccount(acc3);
+		userService.saveAll(Arrays.asList(user1, user2, manager));
 		
 	}
 }

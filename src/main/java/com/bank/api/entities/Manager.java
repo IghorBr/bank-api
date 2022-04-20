@@ -22,7 +22,7 @@ public class Manager extends User {
 	private Agency agency;
 
 	public Manager(@Email String email, @NotNull String name, @NotNull String lastName, String middleName,
-			@NotNull String accountPassword, @NotNull String internetPassword, @CPF @NotNull String cpf) {
-		super(email, name, lastName, middleName, accountPassword, internetPassword, cpf);
+			@NotNull String password, @CPF @NotNull String cpf) {
+		super(email, name, lastName, middleName, password, cpf);
 	}
 }

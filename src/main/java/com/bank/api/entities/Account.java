@@ -49,6 +49,10 @@ public class Account extends BaseDomain {
 	
 	private BigDecimal balance = new BigDecimal(0);
 	
+	@Column(name = "password")
+	@NotNull
+	private String password;
+	
 	@OneToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	@NotNull
@@ -61,16 +65,18 @@ public class Account extends BaseDomain {
 	@NotNull
 	private Agency agency;
 
-	public Account(BigDecimal balance, @NotNull User user, @NotNull Agency agency) {
+	public Account(BigDecimal balance, @NotNull String password, @NotNull User user, @NotNull Agency agency) {
 		super();
 		this.balance = balance;
+		this.password = password;
 		this.user = user;
 		this.agency = agency;
 	}
 
-	public Account(@NotNull User user, @NotNull Agency agency) {
+	public Account(@NotNull String password, @NotNull User user, @NotNull Agency agency) {
 		super();
 		this.user = user;
+		this.password = password;
 		this.agency = agency;
 	}
 }
