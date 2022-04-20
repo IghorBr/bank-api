@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.bank.api.domain;
 
 import java.net.URI;
 import java.util.List;

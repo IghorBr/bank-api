@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.bank.api.entities;
 
 import java.util.Date;
 
@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.example.demo.domain.BaseDomain;
+import com.bank.api.domain.BaseDomain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
