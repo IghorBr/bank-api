@@ -30,10 +30,7 @@ public class UserController extends BaseController<User, UserDTO> {
 	public ResponseEntity<List<UserDTO>> search(
 		@QuerydslPredicate(root = User.class, bindings = UserRepository.class) Predicate predicate) {
 		
-		List<User> users = userService.search(predicate);
-		List<UserDTO> dtos = mapList(users);
-		
+		List<UserDTO> dtos = mapList(userService.search(predicate));
 		return ResponseEntity.ok().body(dtos);
-		
 	}
 }
