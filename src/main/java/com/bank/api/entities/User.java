@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CPF;
@@ -32,6 +33,7 @@ public class User extends BaseDomain {
 	private Long id;
 	
 	@Column(unique = true)
+	@Email
 	private String email;
 	
 	@NotNull

@@ -10,7 +10,7 @@ import com.bank.api.entities.User;
 import com.bank.api.services.UserService;
 
 @RestController
-@RequestMapping(value = "/usuarios")
+@RequestMapping(value = "/users")
 public class UserController extends BaseController<User, UserDTO> {
 
 	public UserController() {
