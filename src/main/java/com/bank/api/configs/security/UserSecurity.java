@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.bank.api.entities.Account;
 import com.bank.api.entities.enums.UserType;
 
 import lombok.Getter;
@@ -19,16 +20,22 @@ public class UserSecurity implements UserDetails {
 	private String email;
 	private String password;
 	private Boolean enabled;
+	
+	@Getter private UserType userType;
+	@Getter private Account account;
+	
 	private Collection<? extends GrantedAuthority> authorities;
 
 	public UserSecurity(Long id, String email, String password, Boolean enabled,
-			UserType type) {
+			UserType type, Account account) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.enabled = enabled;
 		this.authorities =  Arrays.asList(new SimpleGrantedAuthority(type.getDescription()));
+		this.account = account;
+		this.userType = type;
 	}
 	
 	@Override

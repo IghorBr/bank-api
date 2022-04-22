@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
@@ -69,7 +70,8 @@ public class User extends BaseDomain {
 	@Temporal(TemporalType.DATE)
 	private Date createdAt;
 	
-	@OneToOne(mappedBy = "user")
+	@OneToOne
+	@JoinColumn(name = "account_id", referencedColumnName = "account_id")
 	private Account account;
 	
 	@Enumerated(EnumType.STRING)

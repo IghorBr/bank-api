@@ -1,6 +1,7 @@
 package com.bank.api.configs.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,16 @@ public class UserDetailsService implements org.springframework.security.core.use
 		if (user == null) 
 			throw new UsernameNotFoundException("No user with email: " + email);
 		
-		return new UserSecurity(user.getId(), user.getEmail(), user.getPassword(), user.getEnabled(), user.getUserType()); 
+		return new UserSecurity(user.getId(), user.getEmail(), user.getPassword(), 
+				user.getEnabled(), user.getUserType(), user.getAccount()); 
+	}
+	
+	public static UserSecurity getLoggedUser() {
+		try {			
+			return (UserSecurity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }

@@ -61,7 +61,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         
         Gson gson = new Gson();
         PrintWriter out = res.getWriter();
-        UserResponse userResponse = new UserResponse(username, "Bearer " + authority, token);
+        UserResponse userResponse = new UserResponse(username, authority, "Bearer " + token);
         String json = gson.toJson(userResponse);
         
         res.setContentType("application/json");

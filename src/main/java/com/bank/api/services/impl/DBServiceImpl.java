@@ -46,9 +46,9 @@ public class DBServiceImpl {
 		
 //		Account(BigDecimal balance, @NotNull User user, @NotNull Agency agency)
 		
-		Account acc1 = new Account(new BigDecimal(1000), "1234", user1, agency1);
-		Account acc2 = new Account("abcd", user2, agency1);
-		Account acc3 = new Account("1a2b", manager, agency1);
+		Account acc1 = new Account(new BigDecimal(1000), "1234", agency1);
+		Account acc2 = new Account("abcd", agency1);
+		Account acc3 = new Account("1a2b", agency1);
 		
 		accountService.saveAll(Arrays.asList(acc1, acc2, acc3));
 		

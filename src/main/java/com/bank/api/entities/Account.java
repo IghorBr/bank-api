@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -53,11 +52,6 @@ public class Account extends BaseDomain {
 	@NotNull
 	private String password;
 	
-	@OneToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
-	@NotNull
-	private User user;
-	
 	private Boolean enabled;
 	
 	@ManyToOne
@@ -65,17 +59,15 @@ public class Account extends BaseDomain {
 	@NotNull
 	private Agency agency;
 
-	public Account(BigDecimal balance, @NotNull String password, @NotNull User user, @NotNull Agency agency) {
+	public Account(BigDecimal balance, @NotNull String password, @NotNull Agency agency) {
 		super();
 		this.balance = balance;
 		this.password = password;
-		this.user = user;
 		this.agency = agency;
 	}
 
-	public Account(@NotNull String password, @NotNull User user, @NotNull Agency agency) {
+	public Account(@NotNull String password, @NotNull Agency agency) {
 		super();
-		this.user = user;
 		this.password = password;
 		this.agency = agency;
 	}
