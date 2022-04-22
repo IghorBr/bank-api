@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.bank.api.entities.enums.UserType;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,7 +24,7 @@ public class Manager extends User {
 	private Agency agency;
 
 	public Manager(@Email String email, @NotNull String name, @NotNull String lastName, String middleName,
-			@NotNull String password, @CPF @NotNull String cpf) {
-		super(email, name, lastName, middleName, password, cpf);
+			@NotNull String password, @CPF @NotNull String cpf, @NotNull UserType userType) {
+		super(email, name, lastName, middleName, password, cpf, userType);
 	}
 }

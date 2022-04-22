@@ -15,7 +15,9 @@ import com.querydsl.core.types.dsl.StringPath;
 @Repository
 public interface UserRepository extends BaseRepository<User>,
 	QuerydslPredicateExecutor<User>, QuerydslBinderCustomizer<QUser> {
-
+	
+	User findByEmail(String email);
+	
 	@Override
 	default void customize(QuerydslBindings bindings, QUser root) {
 		bindings.bind(String.class)

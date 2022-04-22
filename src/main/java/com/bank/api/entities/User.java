@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.bank.api.domain.BaseDomain;
+import com.bank.api.entities.enums.UserType;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +36,7 @@ public class User extends BaseDomain {
 	@PrePersist
 	private void prePersist() {
 		createdAt = new Date();
+		this.enabled = true;
 	}
 	
 	@Id
@@ -67,9 +71,15 @@ public class User extends BaseDomain {
 	
 	@OneToOne(mappedBy = "user")
 	private Account account;
+	
+	@Enumerated(EnumType.STRING)
+	@NotNull
+	private UserType userType;
+	
+	private Boolean enabled;
 
 	public User(@Email String email, @NotNull String name, @NotNull String lastName, String middleName,
-			@NotNull String password, @CPF @NotNull String cpf) {
+			@NotNull String password, @CPF @NotNull String cpf, @NotNull UserType userType) {
 		super();
 		this.email = email;
 		this.name = name;
@@ -77,5 +87,6 @@ public class User extends BaseDomain {
 		this.middleName = middleName;
 		this.password = password;
 		this.cpf = cpf;
+		this.userType = userType;
 	}
 }
