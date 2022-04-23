@@ -29,6 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired private JWTUtil jwtUtil;
 	
+	private static final String[] ACCOUNT_METHODS = { 
+		"/accounts/deposit",
+		"/accounts/witdraw",
+		"/accounts/transfer",
+	};
+	
 	public SecurityConfig() {
 		super();
 	}
@@ -41,7 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 			.antMatchers("/h2-console/**").permitAll()
-			.antMatchers(HttpMethod.POST , "/managers/new-acc").hasAnyRole("ADMIN", "MANAGER")
+			.antMatchers(HttpMethod.POST , "/managers/new-acc").hasRole("MANAGER")
+			.antMatchers(HttpMethod.PUT, ACCOUNT_METHODS).hasAnyRole("USER", "MANAGER")
 			.anyRequest().authenticated()
 		
 		.and()
