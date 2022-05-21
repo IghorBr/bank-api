@@ -24,4 +24,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 		userRepository.findAll(predicate).forEach(users::add);
 		return users;
 	}
+
+	@Override
+	public User findByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
 }

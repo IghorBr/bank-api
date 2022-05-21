@@ -9,4 +9,6 @@ import com.querydsl.core.types.Predicate;
 public interface UserService extends BaseService<User> {
 
 	List<User> search(Predicate predicate);
+
+	User findByEmail(String email);
 }

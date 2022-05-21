@@ -7,6 +7,7 @@ import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.api.domain.BaseController;
@@ -32,5 +33,12 @@ public class UserController extends BaseController<User, UserDTO> {
 		
 		List<UserDTO> dtos = mapList(userService.search(predicate));
 		return ResponseEntity.ok().body(dtos);
+	}
+	
+	@GetMapping(value="/email")
+	public ResponseEntity<UserDTO> findUserByEmail(@RequestParam(required = true, name = "email") String email) {
+		UserDTO dto = mapper.map(userService.findByEmail(email), UserDTO.class);
+		
+		return ResponseEntity.ok(dto);
 	}
 }
