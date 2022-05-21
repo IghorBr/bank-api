@@ -17,9 +17,11 @@ import lombok.Setter;
 public class AccountActionDTO implements Serializable {
 	private static final long serialVersionUID = 6619657265931527223L;
 	
-	@NotEmpty private String accountNumber;
 	@NotEmpty private String password;
 	@NotNull private BigDecimal amount;
-	private Long idTransfer;
+
+	//VALUES USED TO TRANSFER BETWEEN ACCOUNTS
+	private String accountNumber;
+	private String agencyTransferNumber;
 
 }

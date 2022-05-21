@@ -63,7 +63,7 @@ public class AccountController extends BaseController<Account, AccountDTO> {
 	
 	@PutMapping(value = "/transfer")
 	public ResponseEntity<Void> transfer(@RequestBody @Valid AccountActionDTO accountAct) throws Exception {
-		if (Objects.isNull(accountAct.getIdTransfer()))
+		if (Objects.isNull(accountAct.getAccountNumber()) || Objects.isNull(accountAct.getAgencyTransferNumber()))
 			throw new Exception();
 			
 		if (accountAct.getAmount().compareTo(BigDecimal.ZERO) == -1 || accountAct.getAmount().compareTo(BigDecimal.ZERO) == 0)

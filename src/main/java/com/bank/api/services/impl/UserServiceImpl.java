@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bank.api.domain.BaseServiceImpl;
+import com.bank.api.entities.Account;
 import com.bank.api.entities.User;
 import com.bank.api.repositories.UserRepository;
 import com.bank.api.services.UserService;
@@ -28,5 +29,10 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	@Override
 	public User findByEmail(String email) {
 		return userRepository.findByEmail(email);
+	}
+
+	@Override
+	public User findUserByAccount(Account account) {
+		return userRepository.findByAccount(account);
 	}
 }
