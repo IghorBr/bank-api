@@ -1,6 +1,7 @@
 package com.bank.api.dtos;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -18,5 +19,6 @@ public class AccountDTO extends BaseDTO {
 	@NotEmpty private String accountNumber;
 	@NotEmpty private BigDecimal balance;
 	private Long userId;
+	private List<BankStatementDTO> statements; 
 
 }

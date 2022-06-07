@@ -1,8 +1,11 @@
 package com.bank.api.entities;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -54,6 +58,9 @@ public class Account extends BaseDomain {
 	
 	private Boolean enabled;
 	
+	@OneToMany(mappedBy = "payer", cascade = CascadeType.ALL)
+	private List<BankStatement> statements = new ArrayList<BankStatement>();
+	
 	@ManyToOne
 	@JoinColumn(name = "agency_id", referencedColumnName = "agency_id")
 	@NotNull
@@ -70,5 +77,9 @@ public class Account extends BaseDomain {
 		super();
 		this.password = password;
 		this.agency = agency;
+	}
+	
+	public void addHistory(BankStatement bs) {
+		this.statements.add(bs);
 	}
 }

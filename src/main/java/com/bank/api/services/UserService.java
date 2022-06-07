@@ -14,4 +14,6 @@ public interface UserService extends BaseService<User> {
 	User findByEmail(String email);
 	
 	User findUserByAccount(Account account);
+
+	Account findAccountByUserId(Long id);
 }

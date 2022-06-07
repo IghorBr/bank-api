@@ -35,4 +35,16 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	public User findUserByAccount(Account account) {
 		return userRepository.findByAccount(account);
 	}
+
+	@Override
+	public Account findAccountByUserId(Long id) {
+		User user = null;
+		try {
+			user = userRepository.findById(id).orElseThrow(() -> new Exception());
+		} catch (Exception e) {
+			return null;
+		}
+		
+		return user.getAccount();
+	}
 }
