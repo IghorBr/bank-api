@@ -22,7 +22,7 @@ public class DBServiceImpl {
 	@Autowired private AccountService accountService;
 	@Autowired private AgencyService agencyService;
 	@Autowired private UserService userService;
-	@Autowired private BCryptPasswordEncoder passwordEncoder; 
+	@Autowired private BCryptPasswordEncoder passwordEncoder;
 	
 	public void instantiateTestDatabase() {
 //		User(@Email String email, @NotNull String name, @NotNull String lastName, String middleName,

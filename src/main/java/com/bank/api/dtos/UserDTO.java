@@ -15,6 +15,7 @@ public class UserDTO extends BaseDTO {
 	private String lastName;
 	private String middleName;
 	private String email;
+	private String cpf;
 	private String userType;
 	private AccountDTO account;
 }

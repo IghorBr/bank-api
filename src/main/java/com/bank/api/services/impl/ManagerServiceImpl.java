@@ -48,7 +48,7 @@ public class ManagerServiceImpl extends BaseServiceImpl<Manager> implements Mana
 	public User createAccount(@Valid UserCreateDTO userCreate) throws Exception {
 		UserSecurity loggedUser = UserDetailsService.getLoggedUser();
 		
-		if (loggedUser.getUserType() == UserType.MANAGER) {
+		if (loggedUser.getUserType() != UserType.MANAGER) {
 			throw new Exception();
 		}
 		

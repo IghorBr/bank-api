@@ -1,5 +1,7 @@
 package com.bank.api.repositories;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
@@ -25,4 +27,10 @@ public interface UserRepository extends BaseRepository<User>,
 	
 	User findByEmail(String email);
 	User findByAccount(Account account);
+	
+	@Query(value = "CALL COUNT_USERS", nativeQuery = true)
+	Integer countUsers();
+	
+	@Procedure("GET_COUNT_USERS_BY_TYPE")
+	Integer getCountUsersByType(String type);
 }

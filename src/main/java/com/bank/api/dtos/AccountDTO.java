@@ -18,6 +18,7 @@ public class AccountDTO extends BaseDTO {
 	
 	@NotEmpty private String accountNumber;
 	@NotEmpty private BigDecimal balance;
+	private String agencyAgencyNumber;
 	private Long userId;
 	private List<BankStatementDTO> statements; 
 

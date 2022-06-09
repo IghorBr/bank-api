@@ -1,6 +1,7 @@
 package com.bank.api.controllers;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
@@ -16,6 +17,7 @@ import com.bank.api.dtos.AccountDTO;
 import com.bank.api.dtos.UserDTO;
 import com.bank.api.entities.Account;
 import com.bank.api.entities.User;
+import com.bank.api.entities.enums.UserType;
 import com.bank.api.repositories.UserRepository;
 import com.bank.api.services.UserService;
 import com.querydsl.core.types.Predicate;
@@ -52,4 +54,13 @@ public class UserController extends BaseController<User, UserDTO> {
 		
 		return ResponseEntity.ok(dto);
 	}
+	
+	@GetMapping(value="/count")
+	public ResponseEntity<Integer> countUsers(@RequestParam(required = false, name = "type") UserType type) {
+		if (Objects.isNull(type))
+			return ResponseEntity.ok(userService.countUsers());
+		else
+			return ResponseEntity.ok(userService.countUsersByType(type));
+	}
+	
 }
