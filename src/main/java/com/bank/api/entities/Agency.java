@@ -43,7 +43,7 @@ public class Agency extends BaseDomain {
 	private Manager manager;
 	
 	@OneToMany(mappedBy = "agency")
-	private List<Account> accounts = new ArrayList<Account>();
+	private List<Account> accounts = new ArrayList<>();
 	
 	public void addAccount(Account...accounts) {
 		for (Account account : accounts) {

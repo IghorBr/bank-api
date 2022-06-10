@@ -14,6 +14,8 @@ import com.bank.api.entities.User;
 import com.bank.api.entities.enums.UserType;
 import com.bank.api.repositories.UserRepository;
 import com.bank.api.services.UserService;
+import com.bank.api.services.exceptions.BankException;
+import com.bank.api.services.exceptions.ObjectNotFoundException;
 import com.querydsl.core.types.Predicate;
 
 @Service
@@ -40,7 +42,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	
 	@Override
 	public List<User> search(Predicate predicate) {
-		List<User> users = new ArrayList<User>();
+		List<User> users = new ArrayList<>();
 		
 		userRepository.findAll(predicate).forEach(users::add);
 		return users;
@@ -57,14 +59,8 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	}
 
 	@Override
-	public Account findAccountByUserId(Long id) {
-		User user = null;
-		try {
-			user = userRepository.findById(id).orElseThrow(() -> new Exception());
-		} catch (Exception e) {
-			return null;
-		}
-		
+	public Account findAccountByUserId(Long id) throws BankException {
+		User user = userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("User not found"));		
 		return user.getAccount();
 	}
 
@@ -77,4 +73,5 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	public Integer countUsersByType(UserType type) {
 		return userRepository.getCountUsersByType(type.name());
 	}
+
 }

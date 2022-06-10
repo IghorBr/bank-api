@@ -59,7 +59,7 @@ public class Account extends BaseDomain {
 	private Boolean enabled;
 	
 	@OneToMany(mappedBy = "payer", cascade = CascadeType.ALL)
-	private List<BankStatement> statements = new ArrayList<BankStatement>();
+	private List<BankStatement> statements = new ArrayList<>();
 	
 	@ManyToOne
 	@JoinColumn(name = "agency_id", referencedColumnName = "agency_id")

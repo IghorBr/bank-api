@@ -24,20 +24,19 @@ import com.bank.api.repositories.ManagerRepository;
 import com.bank.api.services.AccountService;
 import com.bank.api.services.ManagerService;
 import com.bank.api.services.UserService;
+import com.bank.api.services.exceptions.BankException;
 import com.querydsl.core.types.Predicate;
 
 @Service
 public class ManagerServiceImpl extends BaseServiceImpl<Manager> implements ManagerService {
 
 	@Autowired ManagerRepository managerRepository;
-	private ModelMapper mapper;
-	
 	@Autowired UserService userService;
 	@Autowired AccountService accountService;
 	
 	@Override
 	public List<Manager> search(Predicate predicate) {
-		List<Manager> managers = new ArrayList<Manager>();
+		List<Manager> managers = new ArrayList<>();
 		managerRepository.findAll(predicate).forEach(managers::add);
 		
 		return managers;
@@ -45,14 +44,14 @@ public class ManagerServiceImpl extends BaseServiceImpl<Manager> implements Mana
 
 	@Override
 	@Transactional(readOnly = false)
-	public User createAccount(@Valid UserCreateDTO userCreate) throws Exception {
+	public User createAccount(@Valid UserCreateDTO userCreate) throws BankException {
 		UserSecurity loggedUser = UserDetailsService.getLoggedUser();
 		
 		if (loggedUser.getUserType() != UserType.MANAGER) {
-			throw new Exception();
+			throw new BankException("You cannot do this action");
 		}
 		
-		mapper = new ModelMapper();
+		ModelMapper mapper = new ModelMapper();
 		
 		User newUser = mapper.map(userCreate, User.class);
 		newUser.setUserType(UserType.USER);

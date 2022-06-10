@@ -21,7 +21,7 @@ public class AgencyServiceImpl extends BaseServiceImpl<Agency> implements Agency
 
 	@Override
 	public List<Agency> search(Predicate predicate) {
-		List<Agency> agencies = new ArrayList<Agency>();
+		List<Agency> agencies = new ArrayList<>();
 		
 		agencyRepository.findAll(predicate).forEach(agencies::add);
 		return agencies;

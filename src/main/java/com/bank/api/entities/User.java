@@ -91,4 +91,8 @@ public class User extends BaseDomain {
 		this.cpf = cpf;
 		this.userType = userType;
 	}
+	
+	
+	
+	
 }

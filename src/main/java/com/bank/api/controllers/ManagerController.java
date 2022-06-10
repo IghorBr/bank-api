@@ -22,6 +22,7 @@ import com.bank.api.entities.Manager;
 import com.bank.api.entities.User;
 import com.bank.api.repositories.AgencyRepository;
 import com.bank.api.services.ManagerService;
+import com.bank.api.services.exceptions.BankException;
 import com.querydsl.core.types.Predicate;
 
 @RestController
@@ -43,7 +44,7 @@ public class ManagerController extends BaseController<Manager, UserDTO> {
 	}
 	
 	@PostMapping(value = "/new-acc")
-	public ResponseEntity<Void> createAccount(@RequestBody @Valid UserCreateDTO userCreate) throws Exception {
+	public ResponseEntity<Void> createAccount(@RequestBody @Valid UserCreateDTO userCreate) throws BankException {
 		User user = managerService.createAccount(userCreate);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

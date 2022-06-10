@@ -1,7 +1,17 @@
 package com.bank.api.services.utils;
 
-public class Util {
+import java.util.Random;
 
+import com.bank.api.services.exceptions.BankException;
+
+public class Util {
+	
+	private Util() {
+		throw new BankException("This is a utility class and cannot be instantiated");
+	}
+	
+	private static final Random random = new Random();
+	
 	public static String getRandomString(int n) {
 		String numericString = "0123456789";
 		
@@ -13,7 +23,7 @@ public class Util {
 				continue;
 			}
 			
-			int index = (int) (numericString.length() * Math.random());
+			int index = (numericString.length() * Util.random.nextInt());
 			sb.append(numericString.charAt(index));
 		}
 		

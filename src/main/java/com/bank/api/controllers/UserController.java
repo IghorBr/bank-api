@@ -20,6 +20,7 @@ import com.bank.api.entities.User;
 import com.bank.api.entities.enums.UserType;
 import com.bank.api.repositories.UserRepository;
 import com.bank.api.services.UserService;
+import com.bank.api.services.exceptions.BankException;
 import com.querydsl.core.types.Predicate;
 
 @RestController
@@ -48,7 +49,7 @@ public class UserController extends BaseController<User, UserDTO> {
 	}
 	
 	@GetMapping(value="/account/{id}")
-	public ResponseEntity<AccountDTO> findAccountByUserId(@PathVariable Long id) {
+	public ResponseEntity<AccountDTO> findAccountByUserId(@PathVariable Long id) throws BankException {
 		Account account = userService.findAccountByUserId(id);
 		AccountDTO dto = mapper.map(account, AccountDTO.class);
 		

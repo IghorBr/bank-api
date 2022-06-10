@@ -6,6 +6,7 @@ import com.bank.api.domain.BaseService;
 import com.bank.api.entities.Account;
 import com.bank.api.entities.User;
 import com.bank.api.entities.enums.UserType;
+import com.bank.api.services.exceptions.BankException;
 import com.querydsl.core.types.Predicate;
 
 public interface UserService extends BaseService<User> {
@@ -16,8 +17,9 @@ public interface UserService extends BaseService<User> {
 	
 	User findUserByAccount(Account account);
 
-	Account findAccountByUserId(Long id);
+	Account findAccountByUserId(Long id) throws BankException;
 	
 	Integer countUsers();
 	Integer countUsersByType(UserType type);
+	
 }
